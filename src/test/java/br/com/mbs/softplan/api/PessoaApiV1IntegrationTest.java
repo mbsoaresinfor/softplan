@@ -46,13 +46,35 @@ class PessoaApiV1IntegrationTest {
 	
 	
 	@Test
+	void testDeletePessoasId() throws JSONException {
+		// adiciona uma pessoa	
+		ResponseEntity<String> responseAdicionaPessoa = adicionaPessoa();			
+		Integer id = Integer.parseInt(responseAdicionaPessoa.getBody());	
+		
+		// deleta
+		TestRestTemplate testRestTemplate = new TestRestTemplate(USUARIO,SENHA);
+		testRestTemplate. delete(getEndPointPessoasV1() + Integer.toString(id) );
+		
+		// busca para verificar que deletou
+		testRestTemplate = new TestRestTemplate(USUARIO,SENHA);
+		ResponseEntity<String> response = testRestTemplate.
+		  getForEntity(getEndPointPessoasV1() + Integer.toString(id) , String.class);
+		
+		assertEquals( HttpStatus.NOT_FOUND,response.getStatusCode());	
+				
+		
+	}
+	
+	
+	@Test
 	void testGetPessoasId() throws JSONException {
 		// adiciona uma pessoa
-		testPostPessoas();
+		ResponseEntity<String> responseAdicionaPessoa = adicionaPessoa();			
+		Integer id = Integer.parseInt(responseAdicionaPessoa.getBody());	
 		
 		TestRestTemplate testRestTemplate = new TestRestTemplate(USUARIO,SENHA);
 		ResponseEntity<String> response = testRestTemplate.
-		  getForEntity(getEndPointPessoasV1() + "1" , String.class);
+		  getForEntity(getEndPointPessoasV1() + Integer.toString(id) , String.class);
 		
 		assertEquals( HttpStatus.OK,response.getStatusCode());		
 		
@@ -72,7 +94,17 @@ class PessoaApiV1IntegrationTest {
 	
 	@Test
 	void testPostPessoas() throws JSONException {
-		
+			 
+		ResponseEntity<String> response = adicionaPessoa();
+		assertEquals( HttpStatus.OK,response.getStatusCode());	
+		Integer retorno = Integer.parseInt(response.getBody());				
+		assertTrue(retorno > 0);
+	
+	}
+	
+	
+	
+	private ResponseEntity<String>  adicionaPessoa() throws JSONException {
 		TestRestTemplate testRestTemplate = new TestRestTemplate(USUARIO,SENHA);
 		 
 		HttpHeaders headers = new HttpHeaders();		
@@ -86,10 +118,10 @@ class PessoaApiV1IntegrationTest {
 		ResponseEntity<String> response = testRestTemplate.
 		  postForEntity(getEndPointPessoasV1(),request,String.class);	 
 		
-		assertEquals( HttpStatus.OK,response.getStatusCode());	
-		Integer retorno = Integer.parseInt(response.getBody());		;		
-		assertTrue(retorno > 0);
-	
+			
+		return response;	
+		
+			
 	}
 	
 
@@ -101,10 +133,7 @@ class PessoaApiV1IntegrationTest {
 	    personJsonObject.put("nacionalidade", "brasileira");
 	    personJsonObject.put("naturalidade", "poa");
 	    personJsonObject.put("nome", "marcelo soares");
-	    personJsonObject.put("sexo", "m");  
-	    
-
-		
+	    personJsonObject.put("sexo", "m");  		
 		return personJsonObject;
 	}
 

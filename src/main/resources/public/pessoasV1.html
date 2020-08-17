@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="ISO-8859-1">
+<title>Pessoas V1</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="app.js"></script>
+<style>
+a {
+	cursor: pointer;
+	background-color: lightblue;
+}
+</style>
+</head>
+<body>
+	<div><h2>CRUD Pessoa V1</h2></div>
+	<div ng-controller="UserCRUDCtrl">
+			<table>
+				<tr>
+					<td width="100">ID:</td>
+					<td><input type="text" id="id" ng-model="user.id" /></td>
+				</tr>
+				<tr>
+					<td width="100">Nome: *</td>
+					<td><input type="text" id="name" ng-model="user.nome" /></td>
+				</tr>
+				<tr>
+					<td width="100">Sexo:</td>
+					<td><input type="text" id="email" ng-model="user.sexo" /></td>
+				</tr>
+				<tr>
+					<td width="100">naturalidade:</td>
+					<td><input type="text" id="email" ng-model="user.naturalidade" /></td>
+				</tr>
+				<tr>
+					<td width="100">dataNascimento:* </td>
+					<td><input type="text" id="email" ng-model="user.dataNascimento" /> dd/mm/aaaa</td>
+				</tr>
+				
+				<tr>
+					<td width="100">nacionalidade: </td>
+					<td><input type="text" id="email" ng-model="user.nacionalidade" /></td>
+				</tr>
+				<tr>
+					<td width="100">Email:</td>
+					<td><input type="text" id="email" ng-model="user.email" /></td>
+				</tr>
+				<tr>
+					<td width="100">CPF: *</td>
+					<td><input type="text" id="email" ng-model="user.cpf" /> somente números</td>
+				</tr>
+				
+			</table>
+			<br /> <br /> 
+			<a ng-click="getUser(user.id)">Buscar pelo ID</a> 
+			<a ng-click="updateUser(user.id,user.nome,user.email,user.sexo,user.dataNascimento,user.naturalidade,user.nacionalidade,user.cpf)">Atualizar</a> 
+			<a ng-click="addUser(user.nome,user.email,user.sexo,user.dataNascimento,user.naturalidade,user.nacionalidade,user.cpf)">Adicionar</a> 
+			<a ng-click="deleteUser(user.id)">Deletar</a>
+
+		<br /> <br />
+		<p style="color: green">{{message}}</p>
+		<p style="color: red">{{errorMessage}}</p>
+
+		<br />
+		<br /> 
+		<a ng-click="getAllUsers()">Buscar todos</a><br /> 
+		<br /> <br />
+		
+		
+		
+		<div ng-repeat="usr in users">		
+			{{usr.id}} - {{usr.nome}} - {{usr.email}} - {{usr.sexo}} - {{usr.dataNascimento}} - {{usr.naturalidade}} - {{usr.nacionalidade}} - {{usr.cpf}}		
+		</div>
+		
+	</div>
+</body>
+</html>
