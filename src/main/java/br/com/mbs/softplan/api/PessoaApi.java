@@ -22,15 +22,16 @@ public interface PessoaApi <T>{
 			    @ApiResponse(code = 200, message = "Sucesso ao salvar a Pessoa"),			    
 			    @ApiResponse(code = 405, message = "Pessoa com problema na validacao"),
 			})
-	 	@RequestMapping(value = "/pessoas", method = RequestMethod.POST,  produces="text/plain")	 
-	    ResponseEntity<String> salvar(T pessoa);
+		
+	 	@RequestMapping( method = RequestMethod.POST, produces="text/plain" )	 
+	    ResponseEntity<String> salvar(@RequestBody T pessoa);
 		
 		
 		@ApiOperation(value = "Retorna uma lista de pessoas",responseContainer="List")
 		 @ApiResponses(value = {
 				    @ApiResponse(code = 200, message = "Sucesso no retorno da lista de pessoas")			   
 				})	 
-		 @RequestMapping(value = "/pessoas", method = RequestMethod.GET, produces="application/json")	 
+		 @RequestMapping( method = RequestMethod.GET, produces="application/json")	 
 		  public List<T> getPessoas();
 		
 		  
@@ -40,7 +41,7 @@ public interface PessoaApi <T>{
 				    @ApiResponse(code = 200, message = "Sucesso no retorno da pessoa"),
 				    @ApiResponse(code = 404, message = "Pessoa nao encontrado"),
 				})
-		 @RequestMapping(value = "/pessoa/{id}", method = RequestMethod.GET, produces="application/json")	 
+		 @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces="application/json")	 
 		  public ResponseEntity<T> getPessoa(@PathVariable Long id) ;
 			
 		 
@@ -50,7 +51,7 @@ public interface PessoaApi <T>{
 				    @ApiResponse(code = 200, message = "Sucesso na remocao da pessoa"),
 				    @ApiResponse(code = 404, message = "Pessoa nao encontrado"),			  
 				})	 
-		 @DeleteMapping("/pessoas/{id}")
+		 @DeleteMapping("/{id}")
 		 public ResponseEntity<Void> deleta(@PathVariable Long id) ;
 			
 		 
@@ -60,7 +61,7 @@ public interface PessoaApi <T>{
 				    @ApiResponse(code = 200, message = "Sucesso na atualizacao da pessoa"),
 				    @ApiResponse(code = 405, message = "Problema na validacao do Pessoa "),			  
 				})	 
-		 @RequestMapping(value = "/pessoas", method = RequestMethod.PUT, produces="application/json")	 
+		 @RequestMapping( method = RequestMethod.PUT, produces="text/plain")	 
 		 public ResponseEntity<String> atualiza(@RequestBody T pessoa);
 			
 

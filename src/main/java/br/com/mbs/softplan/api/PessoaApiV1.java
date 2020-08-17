@@ -21,9 +21,9 @@ import br.com.mbs.softplan.vo.PessoaV1;
 import io.swagger.annotations.Api;
 
 
-@RestController(value="API para manipulacao de Pessoas Versao 1")
-@Api(description="Api de Pessoas versao 1")
-@RequestMapping("/pessoas/v1")
+@RestController(value="API para manipulacao de Pessoas Versão 1")
+@Api(description="Api de Pessoas Versão 1")
+@RequestMapping("/v1/pessoas")
 public class PessoaApiV1 implements PessoaApi<PessoaV1>{
 
 
