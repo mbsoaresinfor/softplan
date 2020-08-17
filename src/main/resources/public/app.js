@@ -5,7 +5,8 @@ app.controller('UserCRUDCtrl', ['$scope','UserCRUDService', function ($scope,Use
 	$scope.users;
  
     $scope.updateUser = function () {
-        UserCRUDService.updateUser( $scope.user.id, $scope.user.nome,$scope.user.email,$scope.user.sexo,$scope.user.dataNascimento,$scope.user.naturalidade,$scope.user.nacionalidade,$scope.user.cpf)
+       if ($scope.user != null && $scope.user.id) {
+		 UserCRUDService.updateUser( $scope.user.id, $scope.user.nome,$scope.user.email,$scope.user.sexo,$scope.user.dataNascimento,$scope.user.naturalidade,$scope.user.nacionalidade,$scope.user.cpf)
           .then(function success(response){
               $scope.message = 'Pessoa atualizada com sucesso!';
               $scope.errorMessage = '';
@@ -14,10 +15,17 @@ app.controller('UserCRUDCtrl', ['$scope','UserCRUDService', function ($scope,Use
               $scope.errorMessage = 'Error na atualizacao da Pessoa!' + response.data;
               $scope.message = '';
           });
-    }
+    
+	}else{
+		$scope.errorMessage = 'Por favor, digite o ID da pessoa para atualizar';            
+        $scope.message = '';
+	}
+	}
     
     $scope.getUser = function () {
-        var id = $scope.user.id;
+       
+	if ($scope.user != null && $scope.user.id) {
+		 var id = $scope.user.id;
         UserCRUDService.getUser($scope.user.id)
           .then(function success(response){
               $scope.user = response.data;
@@ -34,6 +42,10 @@ app.controller('UserCRUDCtrl', ['$scope','UserCRUDService', function ($scope,Use
                   $scope.errorMessage = "Error na busca da pessoa com id: " + id;
               }
           });
+	}else{
+		$scope.errorMessage = 'Por favor, digite o ID da pessoa para buscar';            
+        $scope.message = '';
+	}
     }
     
     $scope.addUser = function () {
@@ -50,24 +62,34 @@ app.controller('UserCRUDCtrl', ['$scope','UserCRUDService', function ($scope,Use
         });
 	}
 	else {
-            $scope.errorMessage = 'Por favor, digite os campos obrigatorios';
+            $scope.errorMessage = 'Por favor, digite os campos obrigatorios para adicionar';
             $scope.message = '';
         }
         
     }
     
     $scope.deleteUser = function () {
-        UserCRUDService.deleteUser($scope.user.id)
-          .then (function success(response){
+        if ($scope.user != null && $scope.user.id) {
+			UserCRUDService.deleteUser($scope.user.id)
+          	.then (function success(response){
               $scope.message = 'Pessoa deletada com sucess!';
               $scope.user = null;
               $scope.errorMessage='';
           },
           function error(response){
-              $scope.errorMessage = 'Error ao deletar a pessoa!';
-              $scope.message='';
+			  if (response.status === 404){
+                  $scope.errorMessage = 'Pessoa nao encontrada com o id: ' + $scope.user.id;
+              }else{
+	              $scope.errorMessage = 'Error ao deletar a pessoa!';
+	              $scope.message='';
+				}
           })
     }
+	else{
+			$scope.errorMessage = 'Por favor, digite o ID da pessoa para deletar';
+            $scope.message = '';
+	}
+}
     
     $scope.getAllUsers = function () {
         UserCRUDService.getAllUsers()

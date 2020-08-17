@@ -14,6 +14,9 @@ public interface PessoaRepository extends
 	List<PessoaEntidade> findByCpf(String cpf);
 	
 	default PessoaEntidade buscar(Long idPessoa) throws ValidacaoException {
+			if(idPessoa == null) {
+				throw new ValidacaoException("Id da Pessoa invalida");
+			}
 			Optional<PessoaEntidade> pessoaEntidade = findById(idPessoa);
 			boolean naoExiste = pessoaEntidade.isPresent() == false;
 			if(naoExiste) {

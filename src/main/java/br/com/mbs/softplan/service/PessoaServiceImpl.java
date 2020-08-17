@@ -48,8 +48,8 @@ public class PessoaServiceImpl<T> implements PessoaService<T> {
 
 	@Override
 	public void atualizar(T pessoa,Long idPessoa) throws ValidacaoException {
-		validacaoNegocio.valida(pessoa);
 		PessoaEntidade pessoaEntidadeDoDB = pessoaRepository.buscar(idPessoa);
+		validacaoNegocio.valida(pessoa);		
 		pessoaConversao.atualizaPessoaEntidade(pessoa, pessoaEntidadeDoDB);			
 		pessoaEntidadeDoDB.setDataAtualizacao(new Date());
 		pessoaRepository.save(pessoaEntidadeDoDB);	
