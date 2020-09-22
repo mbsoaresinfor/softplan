@@ -1,5 +1,5 @@
-# softplan
-Teste para Softplan
+# Teste do marcelo
+
 
 Desenvolvedor: Marcelo Soares
 
@@ -13,7 +13,7 @@ No front, foi usado AngularJs.
 
 Buscando no docker-hub
 
-https://hub.docker.com/repository/docker/mbsoaresinfor/softplan
+https://hub.docker.com/repository/docker/mbsoaresinfor/test_marcelo
 
 TAG: 4
 
@@ -23,33 +23,18 @@ docker run -p 8080:8080 mbsoaresinfor/softplan:4
 
 
 # Autenticação
-Conforme requisitos, existe autenticação básica http para alguns recursos:
+existe autenticação básica http para alguns recursos:
 
-usuario: softplan
+usuario: marcelo
  
 senha: 123
 
 # API
-Foi desenvolvido as duas versões da Api de pessoas (v1,v2), seguindo rigorisamente os requisitos.
-Pode ser utilizado as duas que o sistema vai continuar funcionando. Então é possível inserir
-pessoas com endereço na v2, e listar na v1. Ou vice-versa. 
+Foi desenvolvido as 1 Api de estudante (v1), seguindo rigorisamente os requisitos.
+Esta api é generica, onde caso necessite evoluir ela, seria algo bem fácil.
 
 A documentação está no link: http://localhost:8080/swagger-ui.html
 
 EndPoint:
 
-V1: http://localhost:8080/v1/pessoas
-
-V2: http://localhost:8080/v2/pessoas
-
-Link gitHub: http://localhost:8080/source
-
-# FrontEnd
-http://localhost:8080/pessoasV1.html
-
-# Código fonte
-Pode ser visualizado o link acessando o endpoint:
-
-http://localhost:8080/source
-
-Senão o link é: https://github.com/mbsoaresinfor/softplan
+V1: http://localhost:8080/v1/student

@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>br.com.mbs</groupId>
-  <artifactId>softplan</artifactId>
+  <artifactId>test_marcelo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>SoftPlan</name>
-  <description>Desafio Tecnico</description>
+  <name>test_marcelo</name>
+  <description>Teste do Marcelo</description>
   
   	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -56,11 +56,23 @@
            <scope>runtime</scope>
      </dependency>
        
+       <dependency> 
+    <groupId>org.springframework.boot</groupId> 
+    <artifactId>spring-boot-starter-validation</artifactId> 
+	</dependency>
+       
     <dependency>
 		<groupId>javax.mail</groupId>
 		<artifactId>mail</artifactId>
 		<version>1.4.7</version>
 </dependency>
+
+<dependency>
+  <groupId>org.modelmapper</groupId>
+  <artifactId>modelmapper</artifactId>
+  <version>2.3.0</version>
+</dependency>
+
 </dependencies>
 	
 	<build>
