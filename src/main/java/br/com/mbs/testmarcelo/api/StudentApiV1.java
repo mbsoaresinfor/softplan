@@ -3,7 +3,9 @@ package br.com.mbs.testmarcelo.api;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.mbs.testmarcelo.exception.ValidationBusinessException;
 import br.com.mbs.testmarcelo.service.StudentService;
 import br.com.mbs.testmarcelo.vo.StudentV1;
 import io.swagger.annotations.Api;
@@ -29,13 +30,13 @@ public class StudentApiV1 implements StudentApi<StudentV1>{
 	
 
 	@Override
-	public ResponseEntity<String> save(@Valid @NotNull StudentV1 student) {
+	public ResponseEntity<String> save(@NotNull StudentV1 student) {
 		
 		 ResponseEntity<String> ret = null;
 		 try {
 			 Long ra = studentServiceV1.save(student);
 			 ret =  new ResponseEntity<>( ra.toString(),HttpStatus.OK);
-		 }catch(ValidationBusinessException e) {
+		 }catch(ValidationException e) {
 			 ret = new ResponseEntity<>(e.getMessage(),HttpStatus.METHOD_NOT_ALLOWED);
 		 }
 		 return ret;
@@ -65,7 +66,7 @@ public class StudentApiV1 implements StudentApi<StudentV1>{
 		 try {
 			 studentServiceV1.delete(id);
 			  responseEntity = ResponseEntity.ok().build();
-		 }catch( ValidationBusinessException e) {
+		 }catch( ValidationException e) {
 			 responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		 }
 		 return responseEntity;
@@ -73,12 +74,12 @@ public class StudentApiV1 implements StudentApi<StudentV1>{
 	}
 
 	@Override
-	public ResponseEntity<String> update(@Valid @NotNull StudentV1 student) {
+	public ResponseEntity<String> update(@NotNull StudentV1 student) {
 		 ResponseEntity<String> ret = null;
 		 try {
 			 studentServiceV1.update(student,student.getRa());
 			 ret = ResponseEntity.ok().build();
-		 }catch(ValidationBusinessException e) {		
+		 }catch(ValidationException  e) {		
 			 ret = new ResponseEntity<>(e.getMessage(),HttpStatus.METHOD_NOT_ALLOWED);
 		 }
 		 return ret;

@@ -4,18 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
+import javax.validation.ValidationException;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-
 import br.com.mbs.testmarcelo.converter.StudentConversion;
 import br.com.mbs.testmarcelo.entity.StudentEntity;
-import br.com.mbs.testmarcelo.exception.ValidationBusinessException;
 import br.com.mbs.testmarcelo.repository.StudentRepository;
 import br.com.mbs.testmarcelo.validation.ValidationBusiness;
 
@@ -40,7 +35,7 @@ public class StudentServiceImpl<T> implements StudentService<T> {
 	}
 	
 	@Override
-	public Long save(@Valid T student) throws ValidationBusinessException {
+	public Long save(T student) throws ValidationException {
 		validationBusiness.validation(student);
 		StudentEntity pessoaEntidade = studentConversion.toStudentEntity(student);
 		pessoaEntidade.setDateSave((new Date()));
@@ -48,13 +43,13 @@ public class StudentServiceImpl<T> implements StudentService<T> {
 	}
 
 	@Override
-	public void delete(@NotNull @Min(1) Long ra) throws ValidationBusinessException {
+	public void delete(@NotNull @Min(1) Long ra) throws ValidationException {
 		StudentEntity pessoaEntidade = studentRepository.find(ra);
 		studentRepository.deleteById(pessoaEntidade.getRa());	
 	}
 
 	@Override
-	public void update(@Valid T student,@NotNull @Min(1)Long ra) throws ValidationBusinessException {
+	public void update(T student,@NotNull @Min(1)Long ra) throws ValidationException {
 		StudentEntity pessoaEntidadeDoDB = studentRepository.find(ra);
 		validationBusiness.validation(student);		
 		studentConversion.updateStudentEntity(student, pessoaEntidadeDoDB);			

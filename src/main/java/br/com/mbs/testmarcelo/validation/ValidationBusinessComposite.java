@@ -2,10 +2,8 @@ package br.com.mbs.testmarcelo.validation;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.validation.ValidationException;
 import org.springframework.stereotype.Component;
-
-import br.com.mbs.testmarcelo.exception.ValidationBusinessException;
 
 @Component
 public class ValidationBusinessComposite
@@ -18,7 +16,7 @@ public class ValidationBusinessComposite
 	}
 	
 	@Override
-	public void validation(Object obj) throws ValidationBusinessException {
+	public void validation(Object obj) throws ValidationException {
 		
 		for(ValidationBusiness validacao : validations) {
 			validacao.validation(obj);

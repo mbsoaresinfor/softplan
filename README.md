@@ -4,8 +4,9 @@
 Desenvolvedor: Marcelo Soares
 
 # Informações
-O projeto contempla todos os requisitos obrigatórios e grande parte
-dos extras. Foi utilizado SpringBoot para desenvolvimeto da ApiRest, com banco de dados H2(memória).
+O projeto contempla todos os requisitos obrigatórios.
+Foi utilizado SpringBoot para desenvolvimeto da ApiRest, com banco de dados H2(memória).
+O projeto está como microserviço, atraves de container docker. 
 Na parte dos testes, foi realizado unitários e integrações. Aa documentação está em swagger.
 No front, foi usado AngularJs.
 

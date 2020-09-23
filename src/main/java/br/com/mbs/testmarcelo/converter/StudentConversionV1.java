@@ -31,6 +31,7 @@ public class StudentConversionV1 implements StudentConversion<StudentV1>{
 	public void updateStudentEntity(StudentV1 studentV1, StudentEntity studentEntity) {
 		studentEntity.setEmail(studentV1.getEmail());
 		studentEntity.setName(studentV1.getName());
+		studentEntity.setCpf(studentV1.getCpf());
 	}
 	
 	
