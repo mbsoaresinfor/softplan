@@ -53,6 +53,3 @@ EndPoint:
 
 V1: http://localhost:8080/v1/student
 
-# Quais requisitos obrigatórios que não foram entregues
-Não usei o banco de dados  Postgress ou MySQL, pois com o H2 não precisa instalação e com isso
-é mais fácil o teste. Mas sendo necessário, pode ser ajustado o arquivo do spring para buscar.
